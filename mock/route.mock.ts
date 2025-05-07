@@ -6,6 +6,10 @@ const power = [
     name: 'RtWelcome',
   },
   {
+    path: '/task',
+    name: 'RtTask',
+  },
+  {
     path: '/nested',
     name: 'RtNested',
     children: [
