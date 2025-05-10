@@ -10,6 +10,10 @@ const power = [
     name: 'RtTask',
   },
   {
+    path: '/progressshow',
+    name: 'RtProgressShow',
+  },
+  {
     path: '/nested',
     name: 'RtNested',
     children: [
