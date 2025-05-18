@@ -1,60 +1,53 @@
 <script setup lang="ts">
-import {
-  Aim,
-  Clock,
-  Odometer,
-  OfficeBuilding,
-  Tickets,
-  User,
-} from "@element-plus/icons-vue";
-import { computed, defineEmits, PropType, reactive, ref } from "vue";
-import type { ComponentSize } from "element-plus";
-import { labelMap, STATUS_LIST, statusMap } from "../types/task";
-import type { TaskParams } from "../types/task";
-//定义组件属性
-//|-需传入绑定在ELcard上的用户信息
-const props = defineProps({
-  taskData: {
-    type: Object as PropType<TaskParams>,
-    required: true,
-  },
-});
+  import { Aim, Clock, Odometer, OfficeBuilding, Tickets, User } from '@element-plus/icons-vue';
+  import { computed, defineEmits, PropType, reactive, ref } from 'vue';
+  import type { ComponentSize } from 'element-plus';
+  import { labelMap, STATUS_LIST, statusMap } from '../types/task';
+  import type { TaskParams } from '../types/task';
+  //定义组件属性
+  //|-需传入绑定在ELcard上的用户信息
+  const props = defineProps({
+    taskData: {
+      type: Object as PropType<TaskParams>,
+      required: true,
+    },
+  });
 
-const emit = defineEmits(["sendStatus"]); //向父组件发送status的emit
+  const emit = defineEmits(['sendStatus']); //向父组件发送status的emit
 
-const size = ref<ComponentSize>("default");
+  const size = ref<ComponentSize>('default');
 
-//ELDiscription中的图标样式
-const iconStyle = computed(() => {
-  const marginMap = {
-    large: "8px",
-    default: "6px",
-    small: "4px",
-  };
-  return {
-    marginRight: marginMap[size.value] || marginMap.default,
-  };
-});
+  //ELDiscription中的图标样式
+  const iconStyle = computed(() => {
+    const marginMap = {
+      large: '8px',
+      default: '6px',
+      small: '4px',
+    };
+    return {
+      marginRight: marginMap[size.value] || marginMap.default,
+    };
+  });
 
-//滑块组件中的数值
-const value2 = ref(0);
-//|-创建滑块中的数值与任务状态之间的映射
-type Marks = Record<number, string>;
-const marks = reactive<Marks>({
-  0: statusMap[STATUS_LIST[0]],
-  1: statusMap[STATUS_LIST[1]],
-  2: statusMap[STATUS_LIST[2]],
-  3: statusMap[STATUS_LIST[3]],
-});
-function MapValue2Status(): string {
-  console.log(value2.value);
-  console.log(STATUS_LIST[value2.value]);
-  console.log(statusMap[STATUS_LIST[value2.value]]);
-  return STATUS_LIST[value2.value];
-}
-function status_changed() {
-  emit("sendStatus", STATUS_LIST[value2.value]);
-}
+  //滑块组件中的数值
+  const value2 = ref(0);
+  //|-创建滑块中的数值与任务状态之间的映射
+  type Marks = Record<number, string>;
+  const marks = reactive<Marks>({
+    0: statusMap[STATUS_LIST[0]],
+    1: statusMap[STATUS_LIST[1]],
+    2: statusMap[STATUS_LIST[2]],
+    3: statusMap[STATUS_LIST[3]],
+  });
+  function MapValue2Status(): string {
+    console.log(value2.value);
+    console.log(STATUS_LIST[value2.value]);
+    console.log(statusMap[STATUS_LIST[value2.value]]);
+    return STATUS_LIST[value2.value];
+  }
+  function status_changed() {
+    emit('sendStatus', STATUS_LIST[value2.value]);
+  }
 </script>
 
 <template>
@@ -158,39 +151,41 @@ function status_changed() {
 </template>
 
 <style scoped>
-.el-descriptions {
-  margin-top: 20px;
-}
-.cell-item {
-  display: flex;
-  align-items: center;
-}
-.margin-top {
-  margin-top: 5px;
-}
+  .el-descriptions {
+    margin-top: 20px;
+  }
+  .cell-item {
+    display: flex;
+    align-items: center;
+  }
+  .margin-top {
+    margin-top: 5px;
+  }
 
-.slider-demo-block {
-  margin-top: 10px;
-  margin-bottom: 10px;
-  max-width: 600px;
-  display: flex;
-  align-items: center;
-}
-.slider-demo-block .el-slider {
-  margin-top: 0;
-  margin-left: 12px;
-}
-.slider-demo-block .demonstration {
-  font-size: 20px;
-  color: var(--el-text-color-secondary);
-  line-height: 44px;
-  flex: 1;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  margin-bottom: 0;
-}
-.slider-demo-block .demonstration + .el-slider {
-  flex: 0 0 70%;
-}
+  .slider-demo-block {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    max-width: 600px;
+    display: flex;
+    align-items: center;
+  }
+  .slider-demo-block .el-slider {
+    margin-top: 0;
+    margin-left: 12px;
+  }
+  .slider-demo-block .demonstration {
+    font-size: 20px;
+    color: var(--el-text-color-secondary);
+    line-height: 44px;
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-bottom: 0;
+    text-anchor: middle;
+  }
+  .slider-demo-block .demonstration + .el-slider {
+    flex: 0 0 85%;
+  }
 </style>
